@@ -63,7 +63,7 @@ void plutovg_gradient_add_stop_rgba(plutovg_gradient_t* gradient, double offset,
     if(offset < 0.0) offset = 0.0;
     if(offset > 1.0) offset = 1.0;
 
-    plutovg_array_ensure(gradient->stops, 1);
+    plutovg_array_ensure(gradient->stops, 1, plutovg_gradient_stop_t);
     plutovg_gradient_stop_t* stops = gradient->stops.data;
     int nstops = gradient->stops.size;
     int i = 0;
@@ -162,7 +162,7 @@ void plutovg_gradient_copy(plutovg_gradient_t* gradient, const plutovg_gradient_
     gradient->spread = source->spread;
     gradient->matrix = source->matrix;
     gradient->opacity = source->opacity;
-    plutovg_array_ensure(gradient->stops, source->stops.size);
+    plutovg_array_ensure(gradient->stops, source->stops.size, plutovg_gradient_stop_t );
     memcpy(gradient->values, source->values, sizeof(source->values));
     memcpy(gradient->stops.data, source->stops.data, source->stops.size * sizeof(plutovg_gradient_stop_t));
 }

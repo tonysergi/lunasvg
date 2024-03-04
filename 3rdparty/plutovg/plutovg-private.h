@@ -181,13 +181,13 @@ do { \
         array.capacity = 0; \
 } while(0)
 
-#define plutovg_array_ensure(array, count) \
+#define plutovg_array_ensure(array, count, dtype) \
     do { \
         if(array.size + count > array.capacity) { \
             int capacity = array.size + count; \
             int newcapacity = array.capacity == 0 ? 8 : array.capacity; \
             while(newcapacity < capacity) { newcapacity *= 2; } \
-            array.data = realloc(array.data, newcapacity * sizeof(array.data[0])); \
+            array.data = (dtype*)realloc(array.data, newcapacity * sizeof(array.data[0])); \
             array.capacity = newcapacity; \
     } \
 } while(0)
